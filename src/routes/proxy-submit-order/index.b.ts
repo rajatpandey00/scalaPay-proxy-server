@@ -1,2 +1,2 @@
-export * from './proxy';
+export * from './submit';
 export * from './routes';

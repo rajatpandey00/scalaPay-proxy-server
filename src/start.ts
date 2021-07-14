@@ -12,7 +12,12 @@ const MountRouteDependencies = {
 export async function start(): Promise<express.Express> {
     const app = express();
     app.use(cors());
-    app.use('/', (req: express.Request, res: express.Response, next: NextFunction) => middlewareJWT(req, res, next))
+    app.use(express.json());
+    app.use(
+        '/',
+        (req: express.Request, res: express.Response, next: NextFunction) =>
+            middlewareJWT(req, res, next)
+    );
     routes.mountRoutes(MountRouteDependencies, app);
 
     app.listen(PORT, () => {

@@ -1,5 +1,5 @@
 import express = require('express');
-import { proxy } from './index';
+import { getConfigs } from './index';
 
 type Dependency = {};
 export default function route(
@@ -8,13 +8,13 @@ export default function route(
     //Routes
     const router = express.Router();
     //foo
-    fooService(router, optionalDependencies);
+    fetchService(router, optionalDependencies);
     return router;
 }
 
-export function fooService(
+export function fetchService(
     router: express.Router,
-    dependencies: proxy.ProxyDependencies
+    dependencies: getConfigs.ProxyDependencies
 ) {
-    router.get('/fetchConfigs', proxy.proxy(dependencies));
+    router.get('/fetchConfigs', getConfigs.get(dependencies));
 }
